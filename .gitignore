@@ -16,5 +16,5 @@
 # End of https://www.gitignore.io/api/visualstudiocode
 
 # ignore folders
-js/
 .DS_store
+js/
