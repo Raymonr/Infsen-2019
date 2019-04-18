@@ -2,7 +2,7 @@
 interface Fun<a, b> {
   f: ((_: a) => b)
   then: <c>(g: Fun<b, c>) => Fun<a, c>
-  repeat: (n : number) => Fun<a, a>
+  repeat: (n: number) => Fun<a, a>
 }
 
 let id = <a>(): Fun<a, a> => Fun((x: a) => x)
@@ -10,10 +10,10 @@ let id = <a>(): Fun<a, a> => Fun((x: a) => x)
 let Fun = <a, b>(f: (_: a) => b): Fun<a, b> => {
   return {
     f: f,
-    then: function<c>(g: Fun<b, c>): Fun<a, c> {
+    then: function <c>(g: Fun<b, c>): Fun<a, c> {
       return Fun<a, c>((x: a) => g.f(this.f(x)))
     },
-    repeat: function(this: Fun<a, a>, n: number): Fun<a, a> {
+    repeat: function (this: Fun<a, a>, n: number): Fun<a, a> {
       //TODO 
       return null!
     }
@@ -36,7 +36,7 @@ let map_Option = <a, b>(f: Fun<a, b>): Fun<Option<a>, Option<b>> => {
   //Todo uncomment and remove return null!
   return null!
   // return Fun((opt: Option<a>) => {
-    //TODO 2
+  //TODO 2
   // })
 }
 
@@ -49,15 +49,15 @@ type Either<a, b> = {
   value: b
 }
 
-let inl = <a, b>(): Fun<a, Either<a, b>> =>  Fun((v: a): Either<a, b> => ({ kind: "left", value: v }))
-let inr = <a, b>(): Fun<b, Either<a, b>> => Fun((v: b): Either<a, b> =>  ({ kind: "right", value: v }))
+let inl = <a, b>(): Fun<a, Either<a, b>> => Fun((v: a): Either<a, b> => ({ kind: "left", value: v }))
+let inr = <a, b>(): Fun<b, Either<a, b>> => Fun((v: b): Either<a, b> => ({ kind: "right", value: v }))
 
 let map_Either = <a, a1, b, b1>(f: Fun<a, a1>, g: Fun<b, b1>): Fun<Either<a, b>, Either<a1, b1>> =>
-  Fun((e: Either<a, b>): Either<a1, b1> => 
-       e.kind == "left" ? f.then(inl<a1, b1>()).f(e.value) : g.then(inr<a1, b1>()).f(e.value))
+  Fun((e: Either<a, b>): Either<a1, b1> =>
+    e.kind == "left" ? f.then(inl<a1, b1>()).f(e.value) : g.then(inr<a1, b1>()).f(e.value))
 
 let unit_Either = <a, b>(): Fun<b, Either<a, b>> => inr()
-let join_Either = <a, b>() : Fun<Either<b, Either<b, a>>, Either<b, a>> => {
+let join_Either = <a, b>(): Fun<Either<b, Either<b, a>>, Either<b, a>> => {
   //TODO 3
   return null!
 }
@@ -104,7 +104,7 @@ type State<s, a> = Fun<s, Pair<a, s>>
 
 let map_State = <s, a, b>(f: Fun<a, b>): Fun<State<s, a>, State<s, b>> =>
   Fun((p: State<s, a>) => p.then(map_Pair(f, id<s>())))
-  
+
 let unit_State = <s, a>(): Fun<a, State<s, a>> => Fun((x: a) => Fun((state: s) => Pair(x, state)))
 
 

@@ -3,10 +3,10 @@ export interface Fun<a, b> {
   then: <c>(g: Fun<b, c>) => Fun<a, c>
 }
 
-export let Fun = function<a, b>(f: (_: a) => b): Fun<a, b> {
+export let Fun = function <a, b>(f: (_: a) => b): Fun<a, b> {
   return {
     f: f,
-    then: function<c>(g: Fun<b,c>): Fun<a, c> {
+    then: function <c>(g: Fun<b, c>): Fun<a, c> {
       return Fun<a, c>((x: a) => {
         return g.f(this.f(x))
       })
@@ -22,8 +22,8 @@ interface Pair<a, b> {
   snd: b
 }
 
-let pair = function<a, b>(fst: a, snd: b): Pair<a, b> {
-  return {fst: fst, snd: snd }
+let pair = function <a, b>(fst: a, snd: b): Pair<a, b> {
+  return { fst: fst, snd: snd }
 }
 
 //string monoid
@@ -41,19 +41,19 @@ export type List<a> = {
   tail: List<a>
 }
 
-export let empty = function<a>(): List<a> {return {kind: "empty"} }
-export let cons = function<a>(head: a, tail: List<a>): List<a> {
+export let empty = function <a>(): List<a> { return { kind: "empty" } }
+export let cons = function <a>(head: a, tail: List<a>): List<a> {
   return {
     kind: "cons",
     head: head,
     tail: tail
   }
 }
-let zero_List = function<a>(): Fun<Unit, List<a>> {
+let zero_List = function <a>(): Fun<Unit, List<a>> {
   return Fun<Unit, List<a>>((_: Unit) => empty<a>())
 }
 
-let concat = function<a>(p: Pair<List<a>,List<a>>): List<a> {
+let concat = function <a>(p: Pair<List<a>, List<a>>): List<a> {
   if (p.fst.kind == "empty") {
     return p.snd
   }
@@ -63,18 +63,18 @@ let concat = function<a>(p: Pair<List<a>,List<a>>): List<a> {
   }
 }
 
-let sum_List = function<a>(): Fun<Pair<List<a>, List<a>>, List<a>> {
+let sum_List = function <a>(): Fun<Pair<List<a>, List<a>>, List<a>> {
   return Fun(concat)
 }
 
 //identity functor
 type Identity<a> = Unit
 
-let map_Identity = function<a, b>(_: (_: a) => b): Fun<Identity<a>, Identity<b>> {
+let map_Identity = function <a, b>(_: (_: a) => b): Fun<Identity<a>, Identity<b>> {
   return Fun((x: Identity<a>) => x)
 }
 
-export let main = function() {
+export let main = function () {
   let s1 = "Hi"
   let s2 = " noobs!"
   let l1 = cons(3, cons(5, cons(4, empty())))

@@ -8,7 +8,7 @@ interface Fun<a, b> {
 let Fun = <a, b>(f: (_: a) => b): Fun<a, b> => {
   return {
     f: f,
-    then: function<c>(g: Fun<b, c>): Fun<a, c> {
+    then: function <c>(g: Fun<b, c>): Fun<a, c> {
       return Fun<a, c>((x: a) => g.f(this.f(x)))
     }
   }
@@ -25,31 +25,33 @@ type Either<a, b> = {
 let inl = <a, b>(): Fun<a, Either<a, b>> => {
   return Fun<a, Either<a, b>>((x: a) => {
     return {
-    kind: "left",
-    value: x
-  }})
+      kind: "left",
+      value: x
+    }
+  })
 }
 
 let inr = <a, b>(): Fun<b, Either<a, b>> => {
   return Fun<b, Either<a, b>>((x: b) => {
     return {
-    kind: "right",
-    value: x
-  }})
+      kind: "right",
+      value: x
+    }
+  })
 }
 
-let map_Either = <a, a1, b, b1>(f: Fun<a, a1>, g: Fun<b, b1>): 
+let map_Either = <a, a1, b, b1>(f: Fun<a, a1>, g: Fun<b, b1>):
   Fun<Either<a, b>, Either<a1, b1>> => {
-    return Fun((e: Either<a, b>): Either<a1, b1> => {
-      if (e.kind == "left") {
-        let newValue = f.f(e.value)
-        return inl<a1, b1>().f(newValue)
-      }
-      else {
-        let newValue = g.f(e.value)
-        return inr<a1, b1>().f(newValue)
-      }
-    })
+  return Fun((e: Either<a, b>): Either<a1, b1> => {
+    if (e.kind == "left") {
+      let newValue = f.f(e.value)
+      return inl<a1, b1>().f(newValue)
+    }
+    else {
+      let newValue = g.f(e.value)
+      return inr<a1, b1>().f(newValue)
+    }
+  })
 }
 
 type Unit = {}
@@ -63,7 +65,7 @@ let map_Option = <a, b>(f: Fun<a, b>): Fun<Option<a>, Option<b>> => {
   return map_Either<Unit, Unit, a, b>(id<Unit>(), f)
 }
 
-let unit_Option = <a>(): Fun<a, Option<a>> => inr() 
+let unit_Option = <a>(): Fun<a, Option<a>> => inr()
 
 let join_Option = <a>(): Fun<Option<Option<a>>, Option<a>> => {
   return Fun<Option<Option<a>>, Option<a>>((opt: Option<Option<a>>): Option<a> => {
@@ -78,7 +80,7 @@ let join_Option = <a>(): Fun<Option<Option<a>>, Option<a>> => {
 
 interface Pair<a, b> {
   fst: a
-  snd: b 
+  snd: b
 }
 
 let Pair = <a, b>(x: a, y: b): Pair<a, b> => {
@@ -88,12 +90,12 @@ let Pair = <a, b>(x: a, y: b): Pair<a, b> => {
   }
 }
 
-let map_Pair = <a, a1, b, b1>(f: Fun<a, a1>, g: Fun<b, b1>): 
+let map_Pair = <a, a1, b, b1>(f: Fun<a, a1>, g: Fun<b, b1>):
   Fun<Pair<a, b>, Pair<a1, b1>> => {
-    return Fun((p: Pair<a, b>) => {
-      return Pair<a1, b1>(f.f(p.fst), g.f(p.snd))
-    })
-  }
+  return Fun((p: Pair<a, b>) => {
+    return Pair<a1, b1>(f.f(p.fst), g.f(p.snd))
+  })
+}
 
 // (State s) a
 type State<s, a> = Fun<s, Pair<a, s>>

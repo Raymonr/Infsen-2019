@@ -9,26 +9,26 @@ export type Option<a> = ({
   then: <b>(this: Option<a>, k: Fun<a, Option<b>>) => Option<b>
 }
 
-export let None = function<a>(): Option<a> {
+export let None = function <a>(): Option<a> {
   return {
     kind: "none",
-    then: function<b>(this: Option<a>, k: Fun<a, Option<b>>): Option<b> {
+    then: function <b>(this: Option<a>, k: Fun<a, Option<b>>): Option<b> {
       return map_Option(k).then(join_Option()).f(this)
     }
   }
 }
 
-export let Some = function<a>(content: a): Option<a> {
+export let Some = function <a>(content: a): Option<a> {
   return {
     kind: "some",
     value: content,
-    then: function<b>(this: Option<a>, k: Fun<a, Option<b>>): Option<b> {
+    then: function <b>(this: Option<a>, k: Fun<a, Option<b>>): Option<b> {
       return map_Option(k).then(join_Option()).f(this)
     }
   }
 }
 
-export let map_Option = function<a, b>(mapper: Fun<a, b>): Fun<Option<a>, Option<b>> {
+export let map_Option = function <a, b>(mapper: Fun<a, b>): Fun<Option<a>, Option<b>> {
   let g = (opt: Option<a>) => {
     if (opt.kind == "none") {
       return None<b>()
@@ -41,12 +41,12 @@ export let map_Option = function<a, b>(mapper: Fun<a, b>): Fun<Option<a>, Option
   return Fun<Option<a>, Option<b>>(g)
 }
 
-export let id = function<a>(): Fun<a, a> {
+export let id = function <a>(): Fun<a, a> {
   return Fun<a, a>((x: a) => x)
 }
 
 //unit || return: a -> Option<a>
-export let unit_Option = function<a>() : Fun<a, Option<a>> {
+export let unit_Option = function <a>(): Fun<a, Option<a>> {
   let g = (x: a) => {
     return Some<a>(x)
   }
@@ -54,7 +54,7 @@ export let unit_Option = function<a>() : Fun<a, Option<a>> {
 }
 
 //join: Option<Option<a>> -> Option<a>
-export let join_Option = function<a>(): Fun<Option<Option<a>>, Option<a>> {
+export let join_Option = function <a>(): Fun<Option<Option<a>>, Option<a>> {
   let g = (opt: Option<Option<a>>) => {
     if (opt.kind == "none") {
       return None<a>()
@@ -66,7 +66,7 @@ export let join_Option = function<a>(): Fun<Option<Option<a>>, Option<a>> {
   return Fun<Option<Option<a>>, Option<a>>(g)
 }
 
-export let bind_Option = function<a, b>(opt: Option<a>, k: Fun<a, Option<b>>) : Option<b> {
+export let bind_Option = function <a, b>(opt: Option<a>, k: Fun<a, Option<b>>): Option<b> {
   return map_Option(k).then(join_Option()).f(opt)
 }
 
@@ -96,32 +96,32 @@ export type List<a> = ({
   then: <b>(k: Fun<a, List<b>>) => List<b>
 }
 
-let bind_List = function<a,b>(l: List<a>, k: Fun<a, List<b>>): List<b> {
+let bind_List = function <a, b>(l: List<a>, k: Fun<a, List<b>>): List<b> {
   return map_List2(k).then(join_List()).f(l)
 }
 
-export let Empty = function<a>(): List<a> {
-  return { 
+export let Empty = function <a>(): List<a> {
+  return {
     kind: "empty",
-    then: function<b>(k: Fun<a, List<b>>): List<b> {
+    then: function <b>(k: Fun<a, List<b>>): List<b> {
       return bind_List(this, k)
     }
   }
 }
 
-export let Cons = function<a>(first: a, rest: List<a>): List<a> {
+export let Cons = function <a>(first: a, rest: List<a>): List<a> {
   return {
     kind: "::",
     head: first,
     tail: rest,
-    then: function<b>(k: Fun<a, List<b>>): List<b> {
+    then: function <b>(k: Fun<a, List<b>>): List<b> {
       return bind_List(this, k)
     }
   }
 }
 
 
-export let map_List2 = function<a, b>(mapper: Fun<a, b>): Fun<List<a>, List<b>> {
+export let map_List2 = function <a, b>(mapper: Fun<a, b>): Fun<List<a>, List<b>> {
   let g = (l: List<a>): List<b> => {
     if (l.kind == "empty") {
       return Empty<b>()
@@ -136,19 +136,19 @@ export let map_List2 = function<a, b>(mapper: Fun<a, b>): Fun<List<a>, List<b>> 
 }
 
 //unit for the list functor
-export let unit_List = function<a>() : Fun<a, List<a>> {
+export let unit_List = function <a>(): Fun<a, List<a>> {
   return Fun<a, List<a>>((x: a) => Cons<a>(x, Empty<a>()))
 }
 
 //join for the list functor
 //[[1;2;3];[4;5];[6]] -> [1;2;3;4;5;6] <- [1;2;3] concat [4;5] concat [6]
-let concat = function<a>(l1: List<a>, l2:List<a>): List<a> {
+let concat = function <a>(l1: List<a>, l2: List<a>): List<a> {
   if (l1.kind == "empty") {
     return l2
   }
   else {
     let restConcat = concat(l1.tail, l2)
-    return Cons<a>(l1.head, restConcat) 
+    return Cons<a>(l1.head, restConcat)
   }
 }
 
@@ -160,8 +160,8 @@ let concat = function<a>(l1: List<a>, l2:List<a>): List<a> {
 //[2;3] concat [4;5] -> [2;3;4;5]
 //[1;2;3] concat [4;5] -> [1;2;3;4;5]
 
-export let join_List = function<a>() : Fun<List<List<a>>, List<a>> {
-  let g = (l : List<List<a>>): List<a> => {
+export let join_List = function <a>(): Fun<List<List<a>>, List<a>> {
+  let g = (l: List<List<a>>): List<a> => {
     if (l.kind == "empty") {
       return Empty<a>()
     }
@@ -169,15 +169,15 @@ export let join_List = function<a>() : Fun<List<List<a>>, List<a>> {
       return l.head
     }
     else {
-      let flattened = concat(l.head,l.tail.head)
+      let flattened = concat(l.head, l.tail.head)
       let flattenRest = g(l.tail.tail)
-      return concat(flattened,flattenRest)
+      return concat(flattened, flattenRest)
     }
   }
   return Fun<List<List<a>>, List<a>>(g)
 }
 
-export let printList = function<a>() : Fun<List<a>, string> {
+export let printList = function <a>(): Fun<List<a>, string> {
   let g = (l: List<a>): string => {
     if (l.kind == "empty") {
       return ""
