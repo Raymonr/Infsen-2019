@@ -11,6 +11,7 @@ let Fun = <a, b>(f: (_: a) => b): Fun<a, b> => {
     f: f,
     then: function<c>(g: Fun<b, c>): Fun<a, c> {
       //TODO 1
+      return null!
     }
   }
 }
@@ -24,6 +25,7 @@ interface Pair<a, b> {
 let map_Pair = <a, a1, b, b1>(f: Fun<a, a1>, g: Fun<b, b1>): Fun<Pair<a, b>, Pair<a1, b1>> => {
   return Fun((p: Pair<a, b>) => {
     //TODO 2
+    return null!
   })
 }
 
@@ -35,8 +37,11 @@ let map_Fun_n = <a, b>(g: Fun<a, b>): Fun<Fun_n<a>, Fun_n<b>> => Fun((f: Fun_n<a
 let unit_Fun_n = <a>(): Fun<a, Fun_n<a>> => Fun((x: a) => Fun((_: number) => x))
 
 let join_Fun_n = <a>(): Fun<Fun_n<Fun_n<a>>, Fun_n<a>> => { 
-  return Fun((f: Fun_n<Fun_n<a>>) => Fun((i: number) => //TODO 3
-  )
+  //Todo uncomment and remove return null!
+  return null!
+  // return Fun((f: Fun_n<Fun_n<a>>) => Fun((i: number) => 
+    //TODO 3
+  // )
 }
 
 //exercise 4
@@ -84,14 +89,16 @@ let unit_Option = <a>() : Fun<a, Option<a>> => {
 }
 
 let join_Option = <a>(): Fun<Option<Option<a>>, Option<a>> => {
-  return Fun((opt: Option<Option<a>>) => {
-    if (opt.kind == "none") {
-      //TODO 4
-    }
-    else {
-      //TODO 5
-    }
-  })
+  //Todo uncomment and remove return null!
+  return null!
+  // return Fun((opt: Option<Option<a>>) => {
+  //   if (opt.kind == "none") {
+  //     //TODO 4
+  //   }
+  //   else {
+  //     //TODO 5
+  //   }
+  // })
 }
 
 let bind_Option = <a, b>(opt: Option<a>, f: Fun<a, Option<b>>): Option<b> =>  {
@@ -179,6 +186,7 @@ let setVar = (_var: string, value: number): Statement<Unit> => {
 
 let initMemory = (): Statement<Unit> => {
   //TODO 6
+  return null!
 }
 
 let printMemory = Fun<Memory, string>((m: Memory) => {

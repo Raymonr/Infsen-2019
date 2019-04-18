@@ -20,7 +20,6 @@ let repeat = function<a>(f: Fun<a, a>, n: number): Fun<a, a> {
   }
 }
 
-
 //repeat(f,3)
 //f.then.f.then.f.then.id
 

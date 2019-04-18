@@ -14,7 +14,8 @@ let Fun = <a, b>(f: (_: a) => b): Fun<a, b> => {
       return Fun<a, c>((x: a) => g.f(this.f(x)))
     },
     repeat: function(this: Fun<a, a>, n: number): Fun<a, a> {
-      //TODO 1
+      //TODO 
+      return null!
     }
   }
 }
@@ -32,9 +33,11 @@ let None = <a>(): Option<a> => ({ kind: "none" })
 let Some = <a>(v: a): Option<a> => ({ kind: "some", value: v })
 
 let map_Option = <a, b>(f: Fun<a, b>): Fun<Option<a>, Option<b>> => {
-  return Fun((opt: Option<a>) => {
+  //Todo uncomment and remove return null!
+  return null!
+  // return Fun((opt: Option<a>) => {
     //TODO 2
-  })
+  // })
 }
 
 //exercise 3
@@ -54,16 +57,26 @@ let map_Either = <a, a1, b, b1>(f: Fun<a, a1>, g: Fun<b, b1>): Fun<Either<a, b>,
        e.kind == "left" ? f.then(inl<a1, b1>()).f(e.value) : g.then(inr<a1, b1>()).f(e.value))
 
 let unit_Either = <a, b>(): Fun<b, Either<a, b>> => inr()
-let join_Either = <a, b>() : Fun<Either<b, Either<b, a>>, Either<b, a>> => {} //TODO 3
+let join_Either = <a, b>() : Fun<Either<b, Either<b, a>>, Either<b, a>> => {
+  //TODO 3
+  return null!
+}
 
 //exercise 4
 type Id<a> = a
 
-let map_Id = <a, b>(f: Fun<a, b>): Fun<Id<a>, Id<b>> => {} //TODO 4
-let unit_Id = <a>(): Fun<a, Id<a>> => {} //TODO 5
-let join_Id = <a>(): Fun<Id<Id<a>>, Id<a>> => {} //TODO 6
-
-
+let map_Id = <a, b>(f: Fun<a, b>): Fun<Id<a>, Id<b>> => {
+  //TODO 4
+  return null!
+}
+let unit_Id = <a>(): Fun<a, Id<a>> => {
+  //TODO 5
+  return null!
+}
+let join_Id = <a>(): Fun<Id<Id<a>>, Id<a>> => {
+  //TODO 6
+  return null!
+}
 
 //exercise 5
 interface Pair<a, b> {
@@ -95,7 +108,10 @@ let map_State = <s, a, b>(f: Fun<a, b>): Fun<State<s, a>, State<s, b>> =>
 let unit_State = <s, a>(): Fun<a, State<s, a>> => Fun((x: a) => Fun((state: s) => Pair(x, state)))
 
 
-let join_State = <s, a>(): Fun<State<s, State<s, a>>, State<s, a>> => {} //TODO 7
+let join_State = <s, a>(): Fun<State<s, State<s, a>>, State<s, a>> => {
+  //TODO 7
+  return null!
+}
 
 let bind_State = <s, a, b>(p: State<s, a>, k: Fun<a, State<s, b>>): State<s, b> =>
   map_State<s, a, State<s, b>>(k).then(join_State<s, b>()).f(p)

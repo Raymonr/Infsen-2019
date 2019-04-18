@@ -1,4 +1,4 @@
-import { Fun } from "../Lesson3/practicum3"
+import { Fun } from "./Lesson3"
 
 type Fun_n<a> = Fun<number, a>
 
