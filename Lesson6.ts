@@ -118,11 +118,11 @@ let unit_State = <s, a>(): Fun<a, State<s, a>> => {
 }
 
 //let join_Functor = <a>(): Fun<Functor<Functor<a>>, Functor<a>>
-let join_State = <s, a>(): Fun<State<s, State<s, a>>, State<s, a>> => {
-  return Fun<State<s, State<s, a>>, State<s, a>>((p: State<s, State<s, a>>) => {
-    let stateExec = p.f
-  })
-}s
+// let join_State = <s, a>(): Fun<State<s, State<s, a>>, State<s, a>> => {
+//   return Fun<State<s, State<s, a>>, State<s, a>>((p: State<s, State<s, a>>) => {
+//     let stateExec = p.f
+//   })
+// }
 
 let testEither = (): Either<number, string> => inl<number, string>().f(5)
 let testEither2 = (): Either<number, string> => inr<number, string>().f("Hello world!")
