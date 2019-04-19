@@ -48,7 +48,7 @@ Monad is een Functor die als extra functionaliteiten het volgende heeft.
 
 ### Monoid
 Monoid is een functie die altijd dezelfde uitkomst geeft  
-A + (b + c) is hetzelfde als (a + b) + c
+a + (b + c) is hetzelfde als (a + b) + c
 
 #### Map functor
 Dit is de uitleg van een map functor:  
