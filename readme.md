@@ -30,7 +30,7 @@ Enige voorwaarde is dat elk object een eigen morfisme ID heeft:
 ![morfismeID](https://wikimedia.org/api/rest_v1/media/math/render/svg/5aa0850863f2ed951c4fcbe8ea0540ee40edfe8d)
 
 Totaal voorbeeld die veel gebruikt wordt bij software engering:
-![voorbeeld](https://commons.wikimedia.org/wiki/File:Commutative_diagram_for_morphism.svg)
+![voorbeeld](https://i.ibb.co/hL51Ms9/200px-Commutative-diagram-for-morphism-svg.png)
 
 *Functor*
 Een functor is een functie die gemaakt is uit een morfisme.
