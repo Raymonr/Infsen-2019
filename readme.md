@@ -41,11 +41,12 @@ Een functor is een functie die gemaakt is uit een morfisme.
 
 Functor doet dus via een morfisme een object transformeren naar een ander object.
 
+
 ### Monad   
 
 Monad is een Functor die als extra functionaliteiten het volgende heeft.  
-- unit
-- en een flattened (join aka flatmap).
+- Unit
+- Flattened (join aka flatmap).
 
 ### Monoid
 Monoid is een functie die altijd dezelfde uitkomst geeft  
