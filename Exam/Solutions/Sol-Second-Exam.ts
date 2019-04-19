@@ -93,7 +93,7 @@ interface Fun<a, b> {
   }
   let unit_Id = <a>(): Fun<a, Id<a>> => {
     //TODO 5
-    return Fun((x: Id<a>) => x
+    return Fun((x: Id<a>) => x)
   }
   let join_Id = <a>(): Fun<Id<Id<a>>, Id<a>> => {
     //TODO 6
@@ -136,7 +136,7 @@ interface Fun<a, b> {
     //TODO 7
     // return null!
     return Fun<State<s, State<s, a>>, State<s, a>>((p: State<s, State<s, a>>): State<s, a> => {
-      //return null!
+      return null!
     })
   }
   
