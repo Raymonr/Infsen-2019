@@ -19,7 +19,7 @@ Om te beginnen run je:
     node js/lesson1
 
 ### Hoe is een functie opgebouwd
-![functie omschreven](https://ibb.co/XxwcdXP?raw=true "functie omschreven")
+![functie omschreven](https://ibb.co/XxwcdXP "functie omschreven")
 
 
 Succes!
