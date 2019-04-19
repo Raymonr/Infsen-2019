@@ -45,8 +45,8 @@ Functor doet dus via een morfisme een object transformeren naar een ander object
 ### Monad   
 
 Monad is een Functor die als extra functionaliteiten het volgende heeft.  
-i. Unit
-ii. Flattened (join aka flatmap).
+1. Unit
+1. Flattened (join aka flatmap).
 
 ### Monoid
 Monoid is een functie die altijd dezelfde uitkomst geeft  
