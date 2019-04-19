@@ -21,6 +21,7 @@ Om te beginnen run je:
 ## Recap basis principe
 
 *Functor*
+
 Om functors te begrijpen heb je de kennis nodig van morfisme.
 Morfisme is niets anders dan (f) hoe iets van a -> b transformeert
 zie afbeelding voor verduidelijking:
@@ -36,6 +37,7 @@ Totaal voorbeeld die veel gebruikt wordt bij software engering:
 ![voorbeeld](https://i.ibb.co/hL51Ms9/200px-Commutative-diagram-for-morphism-svg.png)
 
 *Functor*
+
 Een functor is een functie die gemaakt is uit een morfisme.
 
 ![functor](https://wikimedia.org/api/rest_v1/media/math/render/svg/5f8333109f8b20bbb2db91873adcbd445f7c2181)
