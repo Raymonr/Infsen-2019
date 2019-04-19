@@ -1,14 +1,14 @@
 # INF Software Engenering 
 Belangrijke onderwerpen
-- Functor, monad, monoid.
-- Fun (Functie met Map & Identity functor)
-- Monad (Functor + FlatMap)
+1. Functor, monad, monoid.
+1. Fun (Functie met Map & Identity functor)
+1. Monad (Functor + FlatMap)
 
-- Concat
-- Option (None, some)
-- Pair(fst, snd)
-- Either (left, right)
-- State
+1. Concat
+1. Option (None, some)
+1. Pair(fst, snd)
+1. Either (left, right)
+1. State
 
 
 ## How to start
