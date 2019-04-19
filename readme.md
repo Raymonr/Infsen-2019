@@ -23,7 +23,6 @@ Om te beginnen run je:
 *Functor*
 
 Om functors te begrijpen heb je de kennis nodig van morfisme.
-
 Morfisme is niets anders dan (f) hoe iets van a -> b transformeert
 zie afbeelding voor verduidelijking:
 
