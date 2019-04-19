@@ -1,10 +1,9 @@
 # INF Software Engenering 
 Belangrijke onderwerpen
 - Functor, monad, monoid.
-- Identity functor
-- Fun (Functie met map)
-- Map (Mappable)
-- FlatMap
+- Fun (Functie met Map & Identity functor)
+- Monad (Functor + FlatMap)
+
 - Concat
 - Option (None, some)
 - Pair(fst, snd)
@@ -20,7 +19,7 @@ Om te beginnen run je:
 
 ## Recap basis principe
 
-*Functor*  
+### Functor
 Om functors te begrijpen heb je de kennis nodig van morfisme.  
 Morfisme is niets anders dan (f) hoe iets van a -> b transformeert
 zie afbeelding voor verduidelijking:
@@ -42,6 +41,19 @@ Een functor is een functie die gemaakt is uit een morfisme.
 
 Functor doet dus via een morfisme een object transformeren naar een ander object.
 
+### Monad   
+
+Monad is een Functor die als extra functionaliteiten het volgende heeft.  
+- unit
+- en een flattened (join aka flatmap).
+
+### Monoid
+Monoid is een functie die altijd dezelfde uitkomst geeft  
+A + (b + c) is hetzelfde als (a + b) + c
+
+#### Map functor
+Dit is de uitleg van een map functor:  
+![map functor](https://cdn-images-1.medium.com/max/1600/1*NAoX33R1asfD4GpaTqp0-w.png)
 
 ### Hoe is een functie opgebouwd
 ![functie omschreven](https://i.ibb.co/gZnkXy8/functor.gif)
