@@ -205,7 +205,7 @@ let setVar = (_var: string, value: number): Statement<Unit> => {
 
 let initMemory = (): Statement<Unit> => {
     //TODO 6
-    return null!
+    return setVar("value", 10)
 }
 
 let printMemory = Fun<Memory, string>((m: Memory) => {
