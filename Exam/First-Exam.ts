@@ -11,7 +11,7 @@ let Fun = <a, b>(f: (_: a) => b): Fun<a, b> => {
     f: f,
     then: function <c>(g: Fun<b, c>): Fun<a, c> {
       //TODO 1
-      return null!
+      return Fun<a,c>((x) => g.f(f(x)))
     }
   }
 }
@@ -40,7 +40,7 @@ let join_Fun_n = <a>(): Fun<Fun_n<Fun_n<a>>, Fun_n<a>> => {
   //Todo uncomment and remove return null!
   return null!
   // return Fun((f: Fun_n<Fun_n<a>>) => Fun((i: number) => 
-  //TODO 3
+  // TODO 3
   // )
 }
 
