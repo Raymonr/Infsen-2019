@@ -133,13 +133,16 @@ let map_State = <s, a, b>(f: Fun<a, b>): Fun<State<s, a>, State<s, b>> =>
 
 let unit_State = <s, a>(): Fun<a, State<s, a>> => Fun((x: a) => Fun((state: s) => Pair(x, state)))
 
+let apply = <a, b>(): Fun<Pair<Fun<a, b>, a>, b> => Fun(fa => fa.fst.f(fa.snd))
+
 let join_State = <s, a>(): Fun<State<s, State<s, a>>, State<s, a>> => {
     //TODO 7
     // return null!
     return Fun<State<s, State<s, a>>, State<s, a>>((p: State<s, State<s, a>>): State<s, a> => {
-        return null!
+        return p.then(apply())
     })
 }
 
 let bind_State = <s, a, b>(p: State<s, a>, k: Fun<a, State<s, b>>): State<s, b> =>
     map_State<s, a, State<s, b>>(k).then(join_State<s, b>()).f(p)
+    
